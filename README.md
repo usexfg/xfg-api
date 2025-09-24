@@ -157,15 +157,36 @@ Integration tools for blockchain explorers are available in [`explorer-integrati
 
 ## 🏭 Production Deployment
 
-### Important Notes
+### Ubuntu Server Deployment
 
-- The gateway forwards requests to underlying Core/Wallet RPC servers and normalizes responses
-- For production deployments:
-  - Place the gateway behind an API gateway or reverse proxy (NGINX, Traefik)
-  - Configure TLS/SSL encryption
-  - Implement proper authentication and authorization
-  - Set up monitoring and logging
-  - Configure rate limiting and DDoS protection
+For production deployment on Ubuntu servers, we provide comprehensive guides and automated setup:
+
+#### 🚀 Quick Setup (Automated)
+```bash
+# Download and run the automated setup script
+curl -fsSL https://raw.githubusercontent.com/ColinRitman/xfgapi/main/scripts/ubuntu-setup.sh | bash
+```
+
+#### 📖 Manual Setup Guide
+For detailed manual setup instructions, see [`docs/UBUNTU-DEPLOYMENT.md`](./docs/UBUNTU-DEPLOYMENT.md).
+
+#### 🛠️ What the Setup Includes
+- **Nginx reverse proxy** with SSL/TLS termination
+- **PM2 process management** for automatic restarts
+- **Let's Encrypt SSL certificates** with auto-renewal
+- **UFW firewall** configuration
+- **Rate limiting** and security headers
+- **Health monitoring** and logging
+- **Fail2ban** protection against brute force attacks
+
+### Docker Deployment
+
+For containerized deployments, use the provided Docker configuration:
+
+```bash
+# Build and run with Docker Compose
+docker-compose up -d
+```
 
 ### Environment Variables
 
@@ -176,6 +197,20 @@ Integration tools for blockchain explorers are available in [`explorer-integrati
 | `WALLET_RPC_USER` | Wallet RPC username | (optional) |
 | `WALLET_RPC_PASSWORD` | Wallet RPC password | (optional) |
 | `PORT` | Gateway server port | `8787` |
+| `NODE_ENV` | Node.js environment | `production` |
+| `CORS_ORIGIN` | CORS allowed origins | `*` |
+
+### Production Checklist
+
+- ✅ **SSL/TLS encryption** configured
+- ✅ **Reverse proxy** (Nginx) setup
+- ✅ **Process management** (PM2) configured
+- ✅ **Firewall** rules applied
+- ✅ **Rate limiting** enabled
+- ✅ **Security headers** configured
+- ✅ **Monitoring** and logging setup
+- ✅ **Backup strategy** implemented
+- ✅ **Health checks** automated
 
 ## 📄 License
 
