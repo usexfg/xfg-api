@@ -1,12 +1,12 @@
-# XFGAPI - Fuego Blockchain API Suite
+# XFGAPI - Fuego L1 Blockchain API Suite
 
-A comprehensive REST API layer over the Fuego Network and Wallet RPCs with multi-language client SDKs for easy integration.
+REST API layer over the Fuego network & wallet RPCs with multi-language client SDKs for easy integration.
 
 ## 🚀 Features
 
-- **REST API Gateway** - Node.js gateway that translates REST calls to Fuego RPC endpoints
+- **REST API Gateway** - Node.js gateway translates REST calls to Fuego RPC endpoints
 - **Multi-Language Support** - Client SDKs for 10+ programming languages
-- **OpenAPI Specification** - Complete API documentation with Swagger/OpenAPI 3.0
+- **OpenAPI Specification** -  API documentation with Swagger/OpenAPI 3.0
 - **Production Ready** - Privacy-focused server with comprehensive security analysis
 
 ## 📦 Available Client SDKs
@@ -49,7 +49,7 @@ PORT=8787 \
 node server.js
 ```
 
-**Prerequisites**: Start fuegod and Wallet RPC servers locally.
+**Prerequisites**: Start `fuegod` and `xfgwalletd` servers locally.
 
 ### 2. Test the API
 
