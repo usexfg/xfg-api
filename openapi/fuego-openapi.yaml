@@ -48,6 +48,49 @@ paths:
       responses:
         '200':
           description: Header
+  /node/block/{hash}:
+    get:
+      summary: Get block by hash (json_rpc f_block_json)
+      parameters:
+        - in: path
+          name: hash
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Block data
+  /node/transaction/{hash}:
+    get:
+      summary: Get transaction by hash (json_rpc f_transaction_json)
+      parameters:
+        - in: path
+          name: hash
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Transaction data
+  /node/reserve-proof:
+    post:
+      summary: Check reserve proof (json_rpc check_reserve_proof)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                address:
+                  type: string
+                signature:
+                  type: string
+      responses:
+        '200':
+          description: Reserve proof result
   /wallet/balance:
     get:
       summary: Get wallet balance (wallet getbalance)
