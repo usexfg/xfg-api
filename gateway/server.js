@@ -323,6 +323,13 @@ async function proxyDaemon(req, res, rpcUrl) {
       res.status(405).json({ error: 'Method not allowed' });
     }
   } catch (e) {
+    if (req.method === 'POST' && req.body && req.body.jsonrpc) {
+      return res.status(502).json({
+        jsonrpc: req.body.jsonrpc,
+        id: req.body.id || null,
+        error: { code: -32603, message: 'Daemon unreachable: ' + e.message }
+      });
+    }
     res.status(502).json({ error: e.message });
   }
 }
