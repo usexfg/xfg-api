@@ -107,8 +107,23 @@ app.get('/v1/node/transaction/:hash', async (req, res) => {
   catch (e) { res.status(502).json({ error: e.message, code: e.code }); }
 });
 
+app.post('/v1/node/check-tx-key', async (req, res) => {
+  try { res.json(await coreJsonRpc('check_tx_key', req.body || {})); }
+  catch (e) { res.status(502).json({ error: e.message, code: e.code }); }
+});
+
+app.post('/v1/node/check-tx-view-key', async (req, res) => {
+  try { res.json(await coreJsonRpc('check_tx_with_view_key', req.body || {})); }
+  catch (e) { res.status(502).json({ error: e.message, code: e.code }); }
+});
+
 app.post('/v1/node/reserve-proof', async (req, res) => {
   try { res.json(await coreJsonRpc('check_reserve_proof', req.body || {})); }
+  catch (e) { res.status(502).json({ error: e.message, code: e.code }); }
+});
+
+app.post('/v1/node/transactions-by-payment-id', async (req, res) => {
+  try { res.json(await coreJsonRpc('k_transactions_by_payment_id', req.body || {})); }
   catch (e) { res.status(502).json({ error: e.message, code: e.code }); }
 });
 
@@ -116,12 +131,21 @@ app.post('/v1/node/reserve-proof', async (req, res) => {
 //  NODE — Blocks & MemPool (JSON-RPC)
 // ───────────────────────────────────────────────
 app.get('/v1/node/blocks/list', async (req, res) => {
-  try { res.json(await coreJsonRpc('f_blocks_list_json')); }
+  try {
+    var params = {};
+    if (req.query.height) params.height = Number(req.query.height);
+    res.json(await coreJsonRpc('f_blocks_list_json', params));
+  }
   catch (e) { res.status(502).json({ error: e.message, code: e.code }); }
 });
 
 app.get('/v1/node/pool/transactions', async (req, res) => {
   try { res.json(await coreJsonRpc('f_on_transactions_pool_json')); }
+  catch (e) { res.status(502).json({ error: e.message, code: e.code }); }
+});
+
+app.get('/v1/node/pool/mempool', async (req, res) => {
+  try { res.json(await coreJsonRpc('f_mempool_json')); }
   catch (e) { res.status(502).json({ error: e.message, code: e.code }); }
 });
 
