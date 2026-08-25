@@ -1,0 +1,134 @@
+openapi: 3.0.0
+info:
+  title: Fuego XFG API Gateway
+  version: 1.0.0
+  description: External REST API surface for Fuego (XFG) network and Hearth Exchange.
+servers:
+  - url: http://localhost:8787/v1
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+security:
+  - ApiKeyAuth: []
+
+paths:
+  /health:
+    get:
+      summary: Health check
+      security: []
+      responses:
+        '200':
+          description: OK
+  /node/info:
+    get:
+      summary: Get core daemon info
+      security: []
+      responses:
+        '200':
+          description: OK
+  /node/height:
+    get:
+      summary: Get network height
+      security: []
+      responses:
+        '200':
+          description: OK
+  /node/block/{hash}:
+    get:
+      summary: Get block by hash
+      security: []
+      parameters:
+        - in: path
+          name: hash
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+  /hearth/pool:
+    get:
+      summary: Get Hearth AMM pool info
+      security: []
+      responses:
+        '200':
+          description: OK
+  /hearth/quote:
+    get:
+      summary: Get Hearth swap quote
+      security: []
+      parameters:
+        - in: query
+          name: amount
+          schema:
+            type: integer
+        - in: query
+          name: from_asset
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+  /hearth/orderbook:
+    get:
+      summary: Get Hearth aggregated limit orderbook
+      security: []
+      parameters:
+        - in: query
+          name: active_only
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: OK
+  /hearth/ohlcv:
+    get:
+      summary: Get Hearth OHLCV price history
+      security: []
+      parameters:
+        - in: query
+          name: period
+          schema:
+            type: integer
+            default: 300
+        - in: query
+          name: count
+          schema:
+            type: integer
+            default: 100
+      responses:
+        '200':
+          description: OK
+  /hearth/swap:
+    post:
+      summary: Execute an AMM swap
+      responses:
+        '200':
+          description: OK
+  /hearth/order/place:
+    post:
+      summary: Place a limit order
+      responses:
+        '200':
+          description: OK
+  /hearth/order/cancel:
+    post:
+      summary: Cancel a limit order
+      responses:
+        '200':
+          description: OK
+  /wallet/balance:
+    get:
+      summary: Get wallet balance
+      responses:
+        '200':
+          description: OK
+  /wallet/cds:
+    get:
+      summary: Get wallet Certificates of Deposit
+      responses:
+        '200':
+          description: OK
