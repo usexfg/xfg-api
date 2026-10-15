@@ -1,6 +1,6 @@
 /*
  * Elderfire API Gateway
- * REST API over Fuego Wallet RPC
+ * REST API over Fuego L1 Network RPC
  *
  * The version of the OpenAPI document: 1.0.0
  * 
@@ -96,6 +96,12 @@ public class JSON {
         gsonBuilder.registerTypeAdapter(OffsetDateTime.class, offsetDateTimeTypeAdapter);
         gsonBuilder.registerTypeAdapter(LocalDate.class, localDateTypeAdapter);
         gsonBuilder.registerTypeAdapter(byte[].class, byteArrayAdapter);
+        gsonBuilder.registerTypeAdapterFactory(new org.openapitools.client.model.NodeReserveProofPostRequest.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new org.openapitools.client.model.PublicAuditBalances.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new org.openapitools.client.model.PublicAuditBalancesCdYieldAccounting.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new org.openapitools.client.model.PublicAuditBalancesHearthPool.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new org.openapitools.client.model.PublicAuditBalancesSwfAccounts.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new org.openapitools.client.model.PublicAuditBalancesTreasuryAccounts.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new org.openapitools.client.model.WalletTransferPostRequest.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new org.openapitools.client.model.WalletTransferPostRequestDestinationsInner.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new org.openapitools.client.model.WalletTransferPostRequestMessagesInner.CustomTypeAdapterFactory());

@@ -1,7 +1,7 @@
 =begin
 #Elderfire API Gateway
 
-#REST API over Fuego Wallet RPC
+#REST API over Fuego L1 Network RPC
 
 The version of the OpenAPI document: 1.0.0
 
@@ -37,6 +37,28 @@ describe 'DefaultApi' do
   # @param [Hash] opts the optional parameters
   # @return [nil]
   describe 'health_get test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for node_audit_balances_get
+  # Get the public audit accounting snapshot (daemon /get_public_audit)
+  # One read-only snapshot of XFG removed from circulation and its components, protocol treasury custody, CD yield backing, protocol-owned Hearth liquidity, and SWF balances, all read from a single chain tip. Counters and the vault UTXO balances that back them are reported separately and are never summed; there is no combined XFG+HEAT treasury total. Every monetary value is a decimal string of atomic units. No API key is required.
+  # @param [Hash] opts the optional parameters
+  # @return [PublicAuditBalances]
+  describe 'node_audit_balances_get test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for node_block_hash_get
+  # Get block by hash (json_rpc f_block_json)
+  # @param hash 
+  # @param [Hash] opts the optional parameters
+  # @return [nil]
+  describe 'node_block_hash_get test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end
@@ -88,6 +110,28 @@ describe 'DefaultApi' do
   # @param [Hash] opts the optional parameters
   # @return [nil]
   describe 'node_last_block_header_get test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for node_reserve_proof_post
+  # Check reserve proof (json_rpc check_reserve_proof)
+  # @param node_reserve_proof_post_request 
+  # @param [Hash] opts the optional parameters
+  # @return [nil]
+  describe 'node_reserve_proof_post test' do
+    it 'should work' do
+      # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
+    end
+  end
+
+  # unit tests for node_transaction_hash_get
+  # Get transaction by hash (json_rpc f_transaction_json)
+  # @param hash 
+  # @param [Hash] opts the optional parameters
+  # @return [nil]
+  describe 'node_transaction_hash_get test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end

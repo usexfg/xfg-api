@@ -1,5 +1,5 @@
 {
-    "description": "REST API over Fuego Wallet RPC",
+    "description": "REST API over Fuego L1 Network RPC",
     "keywords": [
         "openapitools",
         "openapi-generator",

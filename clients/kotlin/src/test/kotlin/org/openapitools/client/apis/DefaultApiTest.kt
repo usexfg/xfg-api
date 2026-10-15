@@ -19,6 +19,8 @@ import io.kotlintest.shouldBe
 import io.kotlintest.specs.ShouldSpec
 
 import org.openapitools.client.apis.DefaultApi
+import org.openapitools.client.models.NodeReserveProofPostRequest
+import org.openapitools.client.models.PublicAuditBalances
 import org.openapitools.client.models.WalletTransferPostRequest
 
 class DefaultApiTest : ShouldSpec() {
@@ -30,6 +32,20 @@ class DefaultApiTest : ShouldSpec() {
         should("test healthGet") {
             // uncomment below to test healthGet
             //apiInstance.healthGet()
+        }
+
+        // to test nodeAuditBalancesGet
+        should("test nodeAuditBalancesGet") {
+            // uncomment below to test nodeAuditBalancesGet
+            //val result : PublicAuditBalances = apiInstance.nodeAuditBalancesGet()
+            //result shouldBe ("TODO")
+        }
+
+        // to test nodeBlockHashGet
+        should("test nodeBlockHashGet") {
+            // uncomment below to test nodeBlockHashGet
+            //val hash : kotlin.String = hash_example // kotlin.String | 
+            //apiInstance.nodeBlockHashGet(hash)
         }
 
         // to test nodeBlockHeaderByHeightHeightGet
@@ -61,6 +77,20 @@ class DefaultApiTest : ShouldSpec() {
         should("test nodeLastBlockHeaderGet") {
             // uncomment below to test nodeLastBlockHeaderGet
             //apiInstance.nodeLastBlockHeaderGet()
+        }
+
+        // to test nodeReserveProofPost
+        should("test nodeReserveProofPost") {
+            // uncomment below to test nodeReserveProofPost
+            //val nodeReserveProofPostRequest : NodeReserveProofPostRequest =  // NodeReserveProofPostRequest | 
+            //apiInstance.nodeReserveProofPost(nodeReserveProofPostRequest)
+        }
+
+        // to test nodeTransactionHashGet
+        should("test nodeTransactionHashGet") {
+            // uncomment below to test nodeTransactionHashGet
+            //val hash : kotlin.String = hash_example // kotlin.String | 
+            //apiInstance.nodeTransactionHashGet(hash)
         }
 
         // to test walletBalanceGet

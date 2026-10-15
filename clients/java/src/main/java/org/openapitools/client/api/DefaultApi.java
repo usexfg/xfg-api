@@ -1,6 +1,6 @@
 /*
  * Elderfire API Gateway
- * REST API over Fuego Wallet RPC
+ * REST API over Fuego L1 Network RPC
  *
  * The version of the OpenAPI document: 1.0.0
  * 
@@ -27,6 +27,8 @@ import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 
 
+import org.openapitools.client.model.NodeReserveProofPostRequest;
+import org.openapitools.client.model.PublicAuditBalances;
 import org.openapitools.client.model.WalletTransferPostRequest;
 
 import java.lang.reflect.Type;
@@ -181,6 +183,245 @@ public class DefaultApi {
     public okhttp3.Call healthGetAsync(final ApiCallback<Void> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = healthGetValidateBeforeCall(_callback);
+        localVarApiClient.executeAsync(localVarCall, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for nodeAuditBalancesGet
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Audit balances </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call nodeAuditBalancesGetCall(final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/node/audit/balances";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] {  };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call nodeAuditBalancesGetValidateBeforeCall(final ApiCallback _callback) throws ApiException {
+        return nodeAuditBalancesGetCall(_callback);
+
+    }
+
+    /**
+     * Get the public audit accounting snapshot (daemon /get_public_audit)
+     * One read-only snapshot of XFG removed from circulation and its components, protocol treasury custody, CD yield backing, protocol-owned Hearth liquidity, and SWF balances, all read from a single chain tip. Counters and the vault UTXO balances that back them are reported separately and are never summed; there is no combined XFG+HEAT treasury total. Every monetary value is a decimal string of atomic units. No API key is required.
+     * @return PublicAuditBalances
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Audit balances </td><td>  -  </td></tr>
+     </table>
+     */
+    public PublicAuditBalances nodeAuditBalancesGet() throws ApiException {
+        ApiResponse<PublicAuditBalances> localVarResp = nodeAuditBalancesGetWithHttpInfo();
+        return localVarResp.getData();
+    }
+
+    /**
+     * Get the public audit accounting snapshot (daemon /get_public_audit)
+     * One read-only snapshot of XFG removed from circulation and its components, protocol treasury custody, CD yield backing, protocol-owned Hearth liquidity, and SWF balances, all read from a single chain tip. Counters and the vault UTXO balances that back them are reported separately and are never summed; there is no combined XFG+HEAT treasury total. Every monetary value is a decimal string of atomic units. No API key is required.
+     * @return ApiResponse&lt;PublicAuditBalances&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Audit balances </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<PublicAuditBalances> nodeAuditBalancesGetWithHttpInfo() throws ApiException {
+        okhttp3.Call localVarCall = nodeAuditBalancesGetValidateBeforeCall(null);
+        Type localVarReturnType = new TypeToken<PublicAuditBalances>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Get the public audit accounting snapshot (daemon /get_public_audit) (asynchronously)
+     * One read-only snapshot of XFG removed from circulation and its components, protocol treasury custody, CD yield backing, protocol-owned Hearth liquidity, and SWF balances, all read from a single chain tip. Counters and the vault UTXO balances that back them are reported separately and are never summed; there is no combined XFG+HEAT treasury total. Every monetary value is a decimal string of atomic units. No API key is required.
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Audit balances </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call nodeAuditBalancesGetAsync(final ApiCallback<PublicAuditBalances> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = nodeAuditBalancesGetValidateBeforeCall(_callback);
+        Type localVarReturnType = new TypeToken<PublicAuditBalances>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for nodeBlockHashGet
+     * @param hash  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Block data </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call nodeBlockHashGetCall(@javax.annotation.Nonnull String hash, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/node/block/{hash}"
+            .replace("{" + "hash" + "}", localVarApiClient.escapeString(hash.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] {  };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call nodeBlockHashGetValidateBeforeCall(@javax.annotation.Nonnull String hash, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'hash' is set
+        if (hash == null) {
+            throw new ApiException("Missing the required parameter 'hash' when calling nodeBlockHashGet(Async)");
+        }
+
+        return nodeBlockHashGetCall(hash, _callback);
+
+    }
+
+    /**
+     * Get block by hash (json_rpc f_block_json)
+     * 
+     * @param hash  (required)
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Block data </td><td>  -  </td></tr>
+     </table>
+     */
+    public void nodeBlockHashGet(@javax.annotation.Nonnull String hash) throws ApiException {
+        nodeBlockHashGetWithHttpInfo(hash);
+    }
+
+    /**
+     * Get block by hash (json_rpc f_block_json)
+     * 
+     * @param hash  (required)
+     * @return ApiResponse&lt;Void&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Block data </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<Void> nodeBlockHashGetWithHttpInfo(@javax.annotation.Nonnull String hash) throws ApiException {
+        okhttp3.Call localVarCall = nodeBlockHashGetValidateBeforeCall(hash, null);
+        return localVarApiClient.execute(localVarCall);
+    }
+
+    /**
+     * Get block by hash (json_rpc f_block_json) (asynchronously)
+     * 
+     * @param hash  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Block data </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call nodeBlockHashGetAsync(@javax.annotation.Nonnull String hash, final ApiCallback<Void> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = nodeBlockHashGetValidateBeforeCall(hash, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }
@@ -751,6 +992,250 @@ public class DefaultApi {
     public okhttp3.Call nodeLastBlockHeaderGetAsync(final ApiCallback<Void> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = nodeLastBlockHeaderGetValidateBeforeCall(_callback);
+        localVarApiClient.executeAsync(localVarCall, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for nodeReserveProofPost
+     * @param nodeReserveProofPostRequest  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Reserve proof result </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call nodeReserveProofPostCall(@javax.annotation.Nonnull NodeReserveProofPostRequest nodeReserveProofPostRequest, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = nodeReserveProofPostRequest;
+
+        // create path and map variables
+        String localVarPath = "/node/reserve-proof";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] {  };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call nodeReserveProofPostValidateBeforeCall(@javax.annotation.Nonnull NodeReserveProofPostRequest nodeReserveProofPostRequest, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'nodeReserveProofPostRequest' is set
+        if (nodeReserveProofPostRequest == null) {
+            throw new ApiException("Missing the required parameter 'nodeReserveProofPostRequest' when calling nodeReserveProofPost(Async)");
+        }
+
+        return nodeReserveProofPostCall(nodeReserveProofPostRequest, _callback);
+
+    }
+
+    /**
+     * Check reserve proof (json_rpc check_reserve_proof)
+     * 
+     * @param nodeReserveProofPostRequest  (required)
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Reserve proof result </td><td>  -  </td></tr>
+     </table>
+     */
+    public void nodeReserveProofPost(@javax.annotation.Nonnull NodeReserveProofPostRequest nodeReserveProofPostRequest) throws ApiException {
+        nodeReserveProofPostWithHttpInfo(nodeReserveProofPostRequest);
+    }
+
+    /**
+     * Check reserve proof (json_rpc check_reserve_proof)
+     * 
+     * @param nodeReserveProofPostRequest  (required)
+     * @return ApiResponse&lt;Void&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Reserve proof result </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<Void> nodeReserveProofPostWithHttpInfo(@javax.annotation.Nonnull NodeReserveProofPostRequest nodeReserveProofPostRequest) throws ApiException {
+        okhttp3.Call localVarCall = nodeReserveProofPostValidateBeforeCall(nodeReserveProofPostRequest, null);
+        return localVarApiClient.execute(localVarCall);
+    }
+
+    /**
+     * Check reserve proof (json_rpc check_reserve_proof) (asynchronously)
+     * 
+     * @param nodeReserveProofPostRequest  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Reserve proof result </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call nodeReserveProofPostAsync(@javax.annotation.Nonnull NodeReserveProofPostRequest nodeReserveProofPostRequest, final ApiCallback<Void> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = nodeReserveProofPostValidateBeforeCall(nodeReserveProofPostRequest, _callback);
+        localVarApiClient.executeAsync(localVarCall, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for nodeTransactionHashGet
+     * @param hash  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Transaction data </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call nodeTransactionHashGetCall(@javax.annotation.Nonnull String hash, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/node/transaction/{hash}"
+            .replace("{" + "hash" + "}", localVarApiClient.escapeString(hash.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] {  };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call nodeTransactionHashGetValidateBeforeCall(@javax.annotation.Nonnull String hash, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'hash' is set
+        if (hash == null) {
+            throw new ApiException("Missing the required parameter 'hash' when calling nodeTransactionHashGet(Async)");
+        }
+
+        return nodeTransactionHashGetCall(hash, _callback);
+
+    }
+
+    /**
+     * Get transaction by hash (json_rpc f_transaction_json)
+     * 
+     * @param hash  (required)
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Transaction data </td><td>  -  </td></tr>
+     </table>
+     */
+    public void nodeTransactionHashGet(@javax.annotation.Nonnull String hash) throws ApiException {
+        nodeTransactionHashGetWithHttpInfo(hash);
+    }
+
+    /**
+     * Get transaction by hash (json_rpc f_transaction_json)
+     * 
+     * @param hash  (required)
+     * @return ApiResponse&lt;Void&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Transaction data </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<Void> nodeTransactionHashGetWithHttpInfo(@javax.annotation.Nonnull String hash) throws ApiException {
+        okhttp3.Call localVarCall = nodeTransactionHashGetValidateBeforeCall(hash, null);
+        return localVarApiClient.execute(localVarCall);
+    }
+
+    /**
+     * Get transaction by hash (json_rpc f_transaction_json) (asynchronously)
+     * 
+     * @param hash  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Transaction data </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call nodeTransactionHashGetAsync(@javax.annotation.Nonnull String hash, final ApiCallback<Void> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = nodeTransactionHashGetValidateBeforeCall(hash, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }

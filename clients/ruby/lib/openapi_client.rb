@@ -1,7 +1,7 @@
 =begin
 #Elderfire API Gateway
 
-#REST API over Fuego Wallet RPC
+#REST API over Fuego L1 Network RPC
 
 The version of the OpenAPI document: 1.0.0
 
@@ -17,6 +17,12 @@ require 'openapi_client/version'
 require 'openapi_client/configuration'
 
 # Models
+require 'openapi_client/models/node_reserve_proof_post_request'
+require 'openapi_client/models/public_audit_balances'
+require 'openapi_client/models/public_audit_balances_cd_yield_accounting'
+require 'openapi_client/models/public_audit_balances_hearth_pool'
+require 'openapi_client/models/public_audit_balances_swf_accounts'
+require 'openapi_client/models/public_audit_balances_treasury_accounts'
 require 'openapi_client/models/wallet_transfer_post_request'
 require 'openapi_client/models/wallet_transfer_post_request_destinations_inner'
 require 'openapi_client/models/wallet_transfer_post_request_messages_inner'

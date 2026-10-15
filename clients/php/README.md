@@ -1,6 +1,6 @@
 # OpenAPIClient-php
 
-REST API over Fuego Wallet RPC
+REST API over Fuego L1 Network RPC
 
 
 ## Installation & Usage
@@ -70,11 +70,15 @@ All URIs are relative to *http://localhost:8787/v1*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *DefaultApi* | [**healthGet**](docs/Api/DefaultApi.md#healthget) | **GET** /health | Well check
+*DefaultApi* | [**nodeAuditBalancesGet**](docs/Api/DefaultApi.md#nodeauditbalancesget) | **GET** /node/audit/balances | Get the public audit accounting snapshot (daemon /get_public_audit)
+*DefaultApi* | [**nodeBlockHashGet**](docs/Api/DefaultApi.md#nodeblockhashget) | **GET** /node/block/{hash} | Get block by hash (json_rpc f_block_json)
 *DefaultApi* | [**nodeBlockHeaderByHeightHeightGet**](docs/Api/DefaultApi.md#nodeblockheaderbyheightheightget) | **GET** /node/block_header_by_height/{height} | Get block header by height (json_rpc getblockheaderbyheight)
 *DefaultApi* | [**nodeBlockcountGet**](docs/Api/DefaultApi.md#nodeblockcountget) | **GET** /node/blockcount | Get block count (json_rpc getblockcount)
 *DefaultApi* | [**nodeHeightGet**](docs/Api/DefaultApi.md#nodeheightget) | **GET** /node/height | Get node height (maps to /getheight)
 *DefaultApi* | [**nodeInfoGet**](docs/Api/DefaultApi.md#nodeinfoget) | **GET** /node/info | Get node info (maps to /getinfo)
 *DefaultApi* | [**nodeLastBlockHeaderGet**](docs/Api/DefaultApi.md#nodelastblockheaderget) | **GET** /node/last_block_header | Get last block header (json_rpc getlastblockheader)
+*DefaultApi* | [**nodeReserveProofPost**](docs/Api/DefaultApi.md#nodereserveproofpost) | **POST** /node/reserve-proof | Check reserve proof (json_rpc check_reserve_proof)
+*DefaultApi* | [**nodeTransactionHashGet**](docs/Api/DefaultApi.md#nodetransactionhashget) | **GET** /node/transaction/{hash} | Get transaction by hash (json_rpc f_transaction_json)
 *DefaultApi* | [**walletBalanceGet**](docs/Api/DefaultApi.md#walletbalanceget) | **GET** /wallet/balance | Get wallet balance (wallet getbalance)
 *DefaultApi* | [**walletHeightGet**](docs/Api/DefaultApi.md#walletheightget) | **GET** /wallet/height | Get wallet height (wallet get_height)
 *DefaultApi* | [**walletOptimizePost**](docs/Api/DefaultApi.md#walletoptimizepost) | **POST** /wallet/optimize | Optimize wallet (wallet optimize)
@@ -83,6 +87,12 @@ Class | Method | HTTP request | Description
 
 ## Models
 
+- [NodeReserveProofPostRequest](docs/Model/NodeReserveProofPostRequest.md)
+- [PublicAuditBalances](docs/Model/PublicAuditBalances.md)
+- [PublicAuditBalancesCdYieldAccounting](docs/Model/PublicAuditBalancesCdYieldAccounting.md)
+- [PublicAuditBalancesHearthPool](docs/Model/PublicAuditBalancesHearthPool.md)
+- [PublicAuditBalancesSwfAccounts](docs/Model/PublicAuditBalancesSwfAccounts.md)
+- [PublicAuditBalancesTreasuryAccounts](docs/Model/PublicAuditBalancesTreasuryAccounts.md)
 - [WalletTransferPostRequest](docs/Model/WalletTransferPostRequest.md)
 - [WalletTransferPostRequestDestinationsInner](docs/Model/WalletTransferPostRequestDestinationsInner.md)
 - [WalletTransferPostRequestMessagesInner](docs/Model/WalletTransferPostRequestMessagesInner.md)

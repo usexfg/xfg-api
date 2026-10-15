@@ -3,7 +3,7 @@
 =begin
 #Elderfire API Gateway
 
-#REST API over Fuego Wallet RPC
+#REST API over Fuego L1 Network RPC
 
 The version of the OpenAPI document: 1.0.0
 
@@ -23,7 +23,7 @@ Gem::Specification.new do |s|
   s.email       = [""]
   s.homepage    = "https://openapi-generator.tech"
   s.summary     = "Elderfire API Gateway Ruby Gem"
-  s.description = "REST API over Fuego Wallet RPC"
+  s.description = "REST API over Fuego L1 Network RPC"
   s.license     = "Unlicense"
   s.required_ruby_version = ">= 2.7"
   s.metadata    = {}

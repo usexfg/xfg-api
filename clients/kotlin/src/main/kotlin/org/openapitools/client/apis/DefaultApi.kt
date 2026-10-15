@@ -19,6 +19,8 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
+import org.openapitools.client.models.NodeReserveProofPostRequest
+import org.openapitools.client.models.PublicAuditBalances
 import org.openapitools.client.models.WalletTransferPostRequest
 
 import com.squareup.moshi.Json
@@ -105,6 +107,146 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/health",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /node/audit/balances
+     * Get the public audit accounting snapshot (daemon /get_public_audit)
+     * One read-only snapshot of XFG removed from circulation and its components, protocol treasury custody, CD yield backing, protocol-owned Hearth liquidity, and SWF balances, all read from a single chain tip. Counters and the vault UTXO balances that back them are reported separately and are never summed; there is no combined XFG+HEAT treasury total. Every monetary value is a decimal string of atomic units. No API key is required.
+     * @return PublicAuditBalances
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun nodeAuditBalancesGet() : PublicAuditBalances {
+        val localVarResponse = nodeAuditBalancesGetWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as PublicAuditBalances
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /node/audit/balances
+     * Get the public audit accounting snapshot (daemon /get_public_audit)
+     * One read-only snapshot of XFG removed from circulation and its components, protocol treasury custody, CD yield backing, protocol-owned Hearth liquidity, and SWF balances, all read from a single chain tip. Counters and the vault UTXO balances that back them are reported separately and are never summed; there is no combined XFG+HEAT treasury total. Every monetary value is a decimal string of atomic units. No API key is required.
+     * @return ApiResponse<PublicAuditBalances?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun nodeAuditBalancesGetWithHttpInfo() : ApiResponse<PublicAuditBalances?> {
+        val localVariableConfig = nodeAuditBalancesGetRequestConfig()
+
+        return request<Unit, PublicAuditBalances>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation nodeAuditBalancesGet
+     *
+     * @return RequestConfig
+     */
+    fun nodeAuditBalancesGetRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/node/audit/balances",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /node/block/{hash}
+     * Get block by hash (json_rpc f_block_json)
+     * 
+     * @param hash 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun nodeBlockHashGet(hash: kotlin.String) : Unit {
+        val localVarResponse = nodeBlockHashGetWithHttpInfo(hash = hash)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /node/block/{hash}
+     * Get block by hash (json_rpc f_block_json)
+     * 
+     * @param hash 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun nodeBlockHashGetWithHttpInfo(hash: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = nodeBlockHashGetRequestConfig(hash = hash)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation nodeBlockHashGet
+     *
+     * @param hash 
+     * @return RequestConfig
+     */
+    fun nodeBlockHashGetRequestConfig(hash: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/node/block/{hash}".replace("{"+"hash"+"}", encodeURIComponent(hash.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = false,
@@ -443,6 +585,147 @@ class DefaultApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/node/last_block_header",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /node/reserve-proof
+     * Check reserve proof (json_rpc check_reserve_proof)
+     * 
+     * @param nodeReserveProofPostRequest 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun nodeReserveProofPost(nodeReserveProofPostRequest: NodeReserveProofPostRequest) : Unit {
+        val localVarResponse = nodeReserveProofPostWithHttpInfo(nodeReserveProofPostRequest = nodeReserveProofPostRequest)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /node/reserve-proof
+     * Check reserve proof (json_rpc check_reserve_proof)
+     * 
+     * @param nodeReserveProofPostRequest 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun nodeReserveProofPostWithHttpInfo(nodeReserveProofPostRequest: NodeReserveProofPostRequest) : ApiResponse<Unit?> {
+        val localVariableConfig = nodeReserveProofPostRequestConfig(nodeReserveProofPostRequest = nodeReserveProofPostRequest)
+
+        return request<NodeReserveProofPostRequest, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation nodeReserveProofPost
+     *
+     * @param nodeReserveProofPostRequest 
+     * @return RequestConfig
+     */
+    fun nodeReserveProofPostRequestConfig(nodeReserveProofPostRequest: NodeReserveProofPostRequest) : RequestConfig<NodeReserveProofPostRequest> {
+        val localVariableBody = nodeReserveProofPostRequest
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/node/reserve-proof",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /node/transaction/{hash}
+     * Get transaction by hash (json_rpc f_transaction_json)
+     * 
+     * @param hash 
+     * @return void
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun nodeTransactionHashGet(hash: kotlin.String) : Unit {
+        val localVarResponse = nodeTransactionHashGetWithHttpInfo(hash = hash)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> Unit
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /node/transaction/{hash}
+     * Get transaction by hash (json_rpc f_transaction_json)
+     * 
+     * @param hash 
+     * @return ApiResponse<Unit?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Throws(IllegalStateException::class, IOException::class)
+    fun nodeTransactionHashGetWithHttpInfo(hash: kotlin.String) : ApiResponse<Unit?> {
+        val localVariableConfig = nodeTransactionHashGetRequestConfig(hash = hash)
+
+        return request<Unit, Unit>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation nodeTransactionHashGet
+     *
+     * @param hash 
+     * @return RequestConfig
+     */
+    fun nodeTransactionHashGetRequestConfig(hash: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/node/transaction/{hash}".replace("{"+"hash"+"}", encodeURIComponent(hash.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = false,

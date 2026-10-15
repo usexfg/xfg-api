@@ -1,6 +1,6 @@
 /*
  * Elderfire API Gateway
- * REST API over Fuego Wallet RPC
+ * REST API over Fuego L1 Network RPC
  *
  * The version of the OpenAPI document: 1.0.0
  * 
@@ -14,6 +14,8 @@
 package org.openapitools.client.api;
 
 import org.openapitools.client.ApiException;
+import org.openapitools.client.model.NodeReserveProofPostRequest;
+import org.openapitools.client.model.PublicAuditBalances;
 import org.openapitools.client.model.WalletTransferPostRequest;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -39,6 +41,31 @@ public class DefaultApiTest {
     @Test
     public void healthGetTest() throws ApiException {
         api.healthGet();
+        // TODO: test validations
+    }
+
+    /**
+     * Get the public audit accounting snapshot (daemon /get_public_audit)
+     *
+     * One read-only snapshot of XFG removed from circulation and its components, protocol treasury custody, CD yield backing, protocol-owned Hearth liquidity, and SWF balances, all read from a single chain tip. Counters and the vault UTXO balances that back them are reported separately and are never summed; there is no combined XFG+HEAT treasury total. Every monetary value is a decimal string of atomic units. No API key is required.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void nodeAuditBalancesGetTest() throws ApiException {
+        PublicAuditBalances response = api.nodeAuditBalancesGet();
+        // TODO: test validations
+    }
+
+    /**
+     * Get block by hash (json_rpc f_block_json)
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void nodeBlockHashGetTest() throws ApiException {
+        String hash = null;
+        api.nodeBlockHashGet(hash);
         // TODO: test validations
     }
 
@@ -95,6 +122,30 @@ public class DefaultApiTest {
     @Test
     public void nodeLastBlockHeaderGetTest() throws ApiException {
         api.nodeLastBlockHeaderGet();
+        // TODO: test validations
+    }
+
+    /**
+     * Check reserve proof (json_rpc check_reserve_proof)
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void nodeReserveProofPostTest() throws ApiException {
+        NodeReserveProofPostRequest nodeReserveProofPostRequest = null;
+        api.nodeReserveProofPost(nodeReserveProofPostRequest);
+        // TODO: test validations
+    }
+
+    /**
+     * Get transaction by hash (json_rpc f_transaction_json)
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void nodeTransactionHashGetTest() throws ApiException {
+        String hash = null;
+        api.nodeTransactionHashGet(hash);
         // TODO: test validations
     }
 

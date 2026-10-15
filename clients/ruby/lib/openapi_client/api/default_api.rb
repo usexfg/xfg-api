@@ -1,7 +1,7 @@
 =begin
 #Elderfire API Gateway
 
-#REST API over Fuego Wallet RPC
+#REST API over Fuego L1 Network RPC
 
 The version of the OpenAPI document: 1.0.0
 
@@ -68,6 +68,122 @@ module OpenapiClient
       data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: DefaultApi#health_get\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Get the public audit accounting snapshot (daemon /get_public_audit)
+    # One read-only snapshot of XFG removed from circulation and its components, protocol treasury custody, CD yield backing, protocol-owned Hearth liquidity, and SWF balances, all read from a single chain tip. Counters and the vault UTXO balances that back them are reported separately and are never summed; there is no combined XFG+HEAT treasury total. Every monetary value is a decimal string of atomic units. No API key is required.
+    # @param [Hash] opts the optional parameters
+    # @return [PublicAuditBalances]
+    def node_audit_balances_get(opts = {})
+      data, _status_code, _headers = node_audit_balances_get_with_http_info(opts)
+      data
+    end
+
+    # Get the public audit accounting snapshot (daemon /get_public_audit)
+    # One read-only snapshot of XFG removed from circulation and its components, protocol treasury custody, CD yield backing, protocol-owned Hearth liquidity, and SWF balances, all read from a single chain tip. Counters and the vault UTXO balances that back them are reported separately and are never summed; there is no combined XFG+HEAT treasury total. Every monetary value is a decimal string of atomic units. No API key is required.
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(PublicAuditBalances, Integer, Hash)>] PublicAuditBalances data, response status code and response headers
+    def node_audit_balances_get_with_http_info(opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: DefaultApi.node_audit_balances_get ...'
+      end
+      # resource path
+      local_var_path = '/node/audit/balances'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json']) unless header_params['Accept']
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'PublicAuditBalances'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || []
+
+      new_options = opts.merge(
+        :operation => :"DefaultApi.node_audit_balances_get",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: DefaultApi#node_audit_balances_get\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Get block by hash (json_rpc f_block_json)
+    # @param hash [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [nil]
+    def node_block_hash_get(hash, opts = {})
+      node_block_hash_get_with_http_info(hash, opts)
+      nil
+    end
+
+    # Get block by hash (json_rpc f_block_json)
+    # @param hash [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+    def node_block_hash_get_with_http_info(hash, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: DefaultApi.node_block_hash_get ...'
+      end
+      # verify the required parameter 'hash' is set
+      if @api_client.config.client_side_validation && hash.nil?
+        fail ArgumentError, "Missing the required parameter 'hash' when calling DefaultApi.node_block_hash_get"
+      end
+      # resource path
+      local_var_path = '/node/block/{hash}'.sub('{' + 'hash' + '}', CGI.escape(hash.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type]
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || []
+
+      new_options = opts.merge(
+        :operation => :"DefaultApi.node_block_hash_get",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: DefaultApi#node_block_hash_get\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -339,6 +455,129 @@ module OpenapiClient
       data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: DefaultApi#node_last_block_header_get\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Check reserve proof (json_rpc check_reserve_proof)
+    # @param node_reserve_proof_post_request [NodeReserveProofPostRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [nil]
+    def node_reserve_proof_post(node_reserve_proof_post_request, opts = {})
+      node_reserve_proof_post_with_http_info(node_reserve_proof_post_request, opts)
+      nil
+    end
+
+    # Check reserve proof (json_rpc check_reserve_proof)
+    # @param node_reserve_proof_post_request [NodeReserveProofPostRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+    def node_reserve_proof_post_with_http_info(node_reserve_proof_post_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: DefaultApi.node_reserve_proof_post ...'
+      end
+      # verify the required parameter 'node_reserve_proof_post_request' is set
+      if @api_client.config.client_side_validation && node_reserve_proof_post_request.nil?
+        fail ArgumentError, "Missing the required parameter 'node_reserve_proof_post_request' when calling DefaultApi.node_reserve_proof_post"
+      end
+      # resource path
+      local_var_path = '/node/reserve-proof'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+          header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(node_reserve_proof_post_request)
+
+      # return_type
+      return_type = opts[:debug_return_type]
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || []
+
+      new_options = opts.merge(
+        :operation => :"DefaultApi.node_reserve_proof_post",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: DefaultApi#node_reserve_proof_post\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Get transaction by hash (json_rpc f_transaction_json)
+    # @param hash [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [nil]
+    def node_transaction_hash_get(hash, opts = {})
+      node_transaction_hash_get_with_http_info(hash, opts)
+      nil
+    end
+
+    # Get transaction by hash (json_rpc f_transaction_json)
+    # @param hash [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+    def node_transaction_hash_get_with_http_info(hash, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: DefaultApi.node_transaction_hash_get ...'
+      end
+      # verify the required parameter 'hash' is set
+      if @api_client.config.client_side_validation && hash.nil?
+        fail ArgumentError, "Missing the required parameter 'hash' when calling DefaultApi.node_transaction_hash_get"
+      end
+      # resource path
+      local_var_path = '/node/transaction/{hash}'.sub('{' + 'hash' + '}', CGI.escape(hash.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type]
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || []
+
+      new_options = opts.merge(
+        :operation => :"DefaultApi.node_transaction_hash_get",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: DefaultApi#node_transaction_hash_get\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

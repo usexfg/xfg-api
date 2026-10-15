@@ -9,9 +9,15 @@ configuration.go
 git_push.sh
 go.mod
 go.sum
+model__node_reserve_proof_post_request.go
 model__wallet_transfer_post_request.go
 model__wallet_transfer_post_request_destinations_inner.go
 model__wallet_transfer_post_request_messages_inner.go
+model_public_audit_balances.go
+model_public_audit_balances_cd_yield_accounting.go
+model_public_audit_balances_hearth_pool.go
+model_public_audit_balances_swf_accounts.go
+model_public_audit_balances_treasury_accounts.go
 response.go
 test/api_default_test.go
 utils.go

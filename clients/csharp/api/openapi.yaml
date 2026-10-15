@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  description: REST API over Fuego Wallet RPC
+  description: REST API over Fuego L1 Network RPC
   title: Elderfire API Gateway
   version: 1.0.0
 servers:
@@ -50,6 +50,63 @@ paths:
         "200":
           description: Header
       summary: Get block header by height (json_rpc getblockheaderbyheight)
+  /node/block/{hash}:
+    get:
+      parameters:
+      - explode: false
+        in: path
+        name: hash
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: Block data
+      summary: Get block by hash (json_rpc f_block_json)
+  /node/transaction/{hash}:
+    get:
+      parameters:
+      - explode: false
+        in: path
+        name: hash
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: Transaction data
+      summary: Get transaction by hash (json_rpc f_transaction_json)
+  /node/audit/balances:
+    get:
+      description: "One read-only snapshot of XFG removed from circulation and its\
+        \ components, protocol treasury custody, CD yield backing, protocol-owned\
+        \ Hearth liquidity, and SWF balances, all read from a single chain tip. Counters\
+        \ and the vault UTXO balances that back them are reported separately and are\
+        \ never summed; there is no combined XFG+HEAT treasury total. Every monetary\
+        \ value is a decimal string of atomic units. No API key is required."
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PublicAuditBalances"
+          description: Audit balances
+      security: []
+      summary: Get the public audit accounting snapshot (daemon /get_public_audit)
+  /node/reserve-proof:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/_node_reserve_proof_post_request"
+        required: true
+      responses:
+        "200":
+          description: Reserve proof result
+      summary: Check reserve proof (json_rpc check_reserve_proof)
   /wallet/balance:
     get:
       responses:
@@ -100,6 +157,127 @@ paths:
       summary: Optimize wallet (wallet optimize)
 components:
   schemas:
+    AtomicAmount:
+      description: "Unsigned decimal string of atomic units. Never a JSON number:\
+        \ XFG and HEAT amounts exceed 2^53-1, which a JavaScript JSON parser rounds,\
+        \ and a float64 client type loses the low digits. Parse with a 64-bit integer\
+        \ parser or a big-integer type."
+      example: "9007199254740993"
+      pattern: "^[0-9]+$"
+      type: string
+    PublicAuditBalances:
+      example:
+        note_xfg_removed_from_circulation: note_xfg_removed_from_circulation
+        swf_accounts:
+          vault_swf_xfg: ""
+          vault_swf_heat: ""
+          collateral_pending_xfg: ""
+          heat_counter: ""
+        eternal_flame_burn_total_xfg: ""
+        snapshot_block_hash: snapshot_block_hash
+        xfg_removed_from_circulation_total: ""
+        note_reconciliation: note_reconciliation
+        treasury_accounts:
+          pending_xfg: ""
+          heat_reserve: ""
+          bonus_vault_counter_heat: ""
+          legacy_counter_xfg: ""
+          vault_general_heat: ""
+          vault_general_xfg: ""
+          vault_lp_reserve_heat: ""
+          vault_lp_reserve_xfg: ""
+        cd_yield_accounting:
+          pending_xfg: ""
+          base_claim_cap_heat: ""
+          apy_pool_vault_heat: ""
+          claims_counter_heat: ""
+        snapshot_height: 0
+        swf_xfg_permanently_retired_total: ""
+        hearth_pool:
+          pool_total_lp_shares: ""
+          protocol_lp_value_heat: ""
+          pool_reserve_xfg: ""
+          pool_reserve_heat: ""
+          protocol_lp_value_xfg: ""
+          protocol_lp_shares: ""
+        status: OK
+      properties:
+        snapshot_height:
+          description: Zero-based height of the block at snapshot_block_hash.
+          format: int32
+          type: integer
+        snapshot_block_hash:
+          description: Hash of the block at snapshot_height.
+          type: string
+        xfg_removed_from_circulation_total:
+          allOf:
+          - $ref: "#/components/schemas/AtomicAmount"
+          description: "Total XFG removed from circulation — every XFG atom that has\
+            \ left spendable circulation, including Eternal Flame burns, fee conversions,\
+            \ and XFG held as pending SWF collateral. Not a total-supply reduction\
+            \ and not a total-destruction figure."
+        eternal_flame_burn_total_xfg:
+          allOf:
+          - $ref: "#/components/schemas/AtomicAmount"
+          description: Cumulative Eternal Flame burn (the EF routing share of burns).
+        swf_xfg_permanently_retired_total:
+          allOf:
+          - $ref: "#/components/schemas/AtomicAmount"
+          description: SWF XFG permanently retired from total supply.
+        note_xfg_removed_from_circulation:
+          description: Label and scope note for the aggregate above.
+          type: string
+        note_reconciliation:
+          description: "States that the lifecycle amounts are independently sourced\
+            \ and are not guaranteed to reconcile with the aggregate, and that counters\
+            \ are never summed with the vault balances that back them."
+          type: string
+        treasury_accounts:
+          $ref: "#/components/schemas/PublicAuditBalances_treasury_accounts"
+        cd_yield_accounting:
+          $ref: "#/components/schemas/PublicAuditBalances_cd_yield_accounting"
+        hearth_pool:
+          $ref: "#/components/schemas/PublicAuditBalances_hearth_pool"
+        swf_accounts:
+          $ref: "#/components/schemas/PublicAuditBalances_swf_accounts"
+        status:
+          example: OK
+          type: string
+      required:
+      - cd_yield_accounting
+      - eternal_flame_burn_total_xfg
+      - hearth_pool
+      - snapshot_block_hash
+      - snapshot_height
+      - status
+      - swf_accounts
+      - swf_xfg_permanently_retired_total
+      - treasury_accounts
+      - xfg_removed_from_circulation_total
+      type: object
+    _node_reserve_proof_post_request:
+      properties:
+        message:
+          type: string
+        address:
+          type: string
+        signature:
+          type: string
+      type: object
+    _wallet_transfer_post_request_destinations_inner:
+      properties:
+        address:
+          type: string
+        amount:
+          type: integer
+      type: object
+    _wallet_transfer_post_request_messages_inner:
+      properties:
+        address:
+          type: string
+        message:
+          type: string
+      type: object
     _wallet_transfer_post_request:
       properties:
         destinations:
@@ -119,18 +297,133 @@ components:
         ttl:
           type: integer
       type: object
-    _wallet_transfer_post_request_destinations_inner:
+    PublicAuditBalances_treasury_accounts:
+      example:
+        pending_xfg: ""
+        heat_reserve: ""
+        bonus_vault_counter_heat: ""
+        legacy_counter_xfg: ""
+        vault_general_heat: ""
+        vault_general_xfg: ""
+        vault_lp_reserve_heat: ""
+        vault_lp_reserve_xfg: ""
       properties:
-        address:
-          type: string
-        amount:
-          type: integer
+        legacy_counter_xfg:
+          allOf:
+          - $ref: "#/components/schemas/AtomicAmount"
+          description: Deprecated legacy counter. Not the protocol's current holdings.
+        pending_xfg:
+          allOf:
+          - $ref: "#/components/schemas/AtomicAmount"
+          description: Unconverted treasury fee share; the LP pairing source.
+        heat_reserve:
+          allOf:
+          - $ref: "#/components/schemas/AtomicAmount"
+          description: HEAT leg of the treasury LP position.
+        bonus_vault_counter_heat:
+          allOf:
+          - $ref: "#/components/schemas/AtomicAmount"
+          description: "Bonus vault counter, HEAT atomics."
+        vault_general_xfg:
+          allOf:
+          - $ref: "#/components/schemas/AtomicAmount"
+          description: "GENERAL_RESERVE partition UTXO balance, XFG atomics."
+        vault_general_heat:
+          allOf:
+          - $ref: "#/components/schemas/AtomicAmount"
+          description: "GENERAL_RESERVE partition UTXO balance, HEAT atomics."
+        vault_lp_reserve_xfg:
+          allOf:
+          - $ref: "#/components/schemas/AtomicAmount"
+          description: "LP_RESERVE partition UTXO balance, XFG atomics."
+        vault_lp_reserve_heat:
+          allOf:
+          - $ref: "#/components/schemas/AtomicAmount"
+          description: "LP_RESERVE partition UTXO balance, HEAT atomics."
       type: object
-    _wallet_transfer_post_request_messages_inner:
+    PublicAuditBalances_cd_yield_accounting:
+      example:
+        pending_xfg: ""
+        base_claim_cap_heat: ""
+        apy_pool_vault_heat: ""
+        claims_counter_heat: ""
       properties:
-        address:
-          type: string
-        message:
-          type: string
+        pending_xfg:
+          allOf:
+          - $ref: "#/components/schemas/AtomicAmount"
+          description: "Accrued fee value still denominated in XFG, not yet converted."
+        claims_counter_heat:
+          allOf:
+          - $ref: "#/components/schemas/AtomicAmount"
+          description: "CD yield claims counter, HEAT atomics."
+        apy_pool_vault_heat:
+          allOf:
+          - $ref: "#/components/schemas/AtomicAmount"
+          description: "CD_APY_POOL partition UTXO balance backing the counter, HEAT\
+            \ atomics."
+        base_claim_cap_heat:
+          allOf:
+          - $ref: "#/components/schemas/AtomicAmount"
+          description: "Effective cap on a base claim: min(claims_counter_heat, apy_pool_vault_heat),\
+            \ matching what consensus accepts."
+      type: object
+    PublicAuditBalances_hearth_pool:
+      example:
+        pool_total_lp_shares: ""
+        protocol_lp_value_heat: ""
+        pool_reserve_xfg: ""
+        pool_reserve_heat: ""
+        protocol_lp_value_xfg: ""
+        protocol_lp_shares: ""
+      properties:
+        pool_reserve_xfg:
+          allOf:
+          - $ref: "#/components/schemas/AtomicAmount"
+          description: "Whole shared Hearth pool XFG reserve, not the protocol's share."
+        pool_reserve_heat:
+          allOf:
+          - $ref: "#/components/schemas/AtomicAmount"
+          description: Whole shared Hearth pool HEAT reserve.
+        pool_total_lp_shares:
+          allOf:
+          - $ref: "#/components/schemas/AtomicAmount"
+          description: Total LP shares outstanding for the shared pool.
+        protocol_lp_shares:
+          allOf:
+          - $ref: "#/components/schemas/AtomicAmount"
+          description: The protocol's LP shares in that pool.
+        protocol_lp_value_xfg:
+          allOf:
+          - $ref: "#/components/schemas/AtomicAmount"
+          description: Pro-rata XFG value of protocol_lp_shares.
+        protocol_lp_value_heat:
+          allOf:
+          - $ref: "#/components/schemas/AtomicAmount"
+          description: Pro-rata HEAT value of protocol_lp_shares.
+      type: object
+    PublicAuditBalances_swf_accounts:
+      example:
+        vault_swf_xfg: ""
+        vault_swf_heat: ""
+        collateral_pending_xfg: ""
+        heat_counter: ""
+      properties:
+        collateral_pending_xfg:
+          allOf:
+          - $ref: "#/components/schemas/AtomicAmount"
+          description: SWF XFG that has left circulation but is still in total supply.
+            Not a burn and not permanently retired.
+        heat_counter:
+          allOf:
+          - $ref: "#/components/schemas/AtomicAmount"
+          description: SWF HEAT collateral counter. Separate from SWF vault UTXOs.
+        vault_swf_xfg:
+          allOf:
+          - $ref: "#/components/schemas/AtomicAmount"
+          description: "SWF partition UTXO balance, XFG atomics."
+        vault_swf_heat:
+          allOf:
+          - $ref: "#/components/schemas/AtomicAmount"
+          description: "SWF partition UTXO balance, HEAT atomics."
       type: object
 

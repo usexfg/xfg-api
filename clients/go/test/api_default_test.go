@@ -33,6 +33,31 @@ func Test_openapi_DefaultAPIService(t *testing.T) {
 
 	})
 
+	t.Run("Test DefaultAPIService NodeAuditBalancesGet", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.DefaultAPI.NodeAuditBalancesGet(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DefaultAPIService NodeBlockHashGet", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var hash string
+
+		httpRes, err := apiClient.DefaultAPI.NodeBlockHashGet(context.Background(), hash).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test DefaultAPIService NodeBlockHeaderByHeightHeightGet", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
@@ -84,6 +109,30 @@ func Test_openapi_DefaultAPIService(t *testing.T) {
 		t.Skip("skip test")  // remove to run test
 
 		httpRes, err := apiClient.DefaultAPI.NodeLastBlockHeaderGet(context.Background()).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DefaultAPIService NodeReserveProofPost", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		httpRes, err := apiClient.DefaultAPI.NodeReserveProofPost(context.Background()).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test DefaultAPIService NodeTransactionHashGet", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var hash string
+
+		httpRes, err := apiClient.DefaultAPI.NodeTransactionHashGet(context.Background(), hash).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)

@@ -1,7 +1,7 @@
 =begin
 #Elderfire API Gateway
 
-#REST API over Fuego Wallet RPC
+#REST API over Fuego L1 Network RPC
 
 The version of the OpenAPI document: 1.0.0
 

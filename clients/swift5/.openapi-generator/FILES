@@ -12,6 +12,12 @@ OpenAPIClient/Classes/OpenAPIs/Extensions.swift
 OpenAPIClient/Classes/OpenAPIs/JSONDataEncoding.swift
 OpenAPIClient/Classes/OpenAPIs/JSONEncodingHelper.swift
 OpenAPIClient/Classes/OpenAPIs/Models.swift
+OpenAPIClient/Classes/OpenAPIs/Models/NodeReserveProofPostRequest.swift
+OpenAPIClient/Classes/OpenAPIs/Models/PublicAuditBalances.swift
+OpenAPIClient/Classes/OpenAPIs/Models/PublicAuditBalancesCdYieldAccounting.swift
+OpenAPIClient/Classes/OpenAPIs/Models/PublicAuditBalancesHearthPool.swift
+OpenAPIClient/Classes/OpenAPIs/Models/PublicAuditBalancesSwfAccounts.swift
+OpenAPIClient/Classes/OpenAPIs/Models/PublicAuditBalancesTreasuryAccounts.swift
 OpenAPIClient/Classes/OpenAPIs/Models/WalletTransferPostRequest.swift
 OpenAPIClient/Classes/OpenAPIs/Models/WalletTransferPostRequestDestinationsInner.swift
 OpenAPIClient/Classes/OpenAPIs/Models/WalletTransferPostRequestMessagesInner.swift

@@ -396,6 +396,14 @@ app.get('/v1/node/treasury', async (req, res) => {
 });
 
 // ───────────────────────────────────────────────
+//  PUBLIC AUDIT — one read-only accounting snapshot
+// ───────────────────────────────────────────────
+app.get('/v1/node/audit/balances', async (req, res) => {
+  try { res.json(await coreGet('/get_public_audit')); }
+  catch (e) { res.status(502).json({ error: e.message }); }
+});
+
+// ───────────────────────────────────────────────
 //  CDs — Commitment Deposits
 // ───────────────────────────────────────────────
 app.get('/v1/node/deposits', async (req, res) => {

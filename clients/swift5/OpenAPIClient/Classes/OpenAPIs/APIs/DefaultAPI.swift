@@ -54,6 +54,94 @@ open class DefaultAPI {
     }
 
     /**
+     Get the public audit accounting snapshot (daemon /get_public_audit)
+     
+     - parameter apiResponseQueue: The queue on which api response is dispatched.
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    @discardableResult
+    open class func nodeAuditBalancesGet(apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: PublicAuditBalances?, _ error: Error?) -> Void)) -> RequestTask {
+        return nodeAuditBalancesGetWithRequestBuilder().execute(apiResponseQueue) { result in
+            switch result {
+            case let .success(response):
+                completion(response.body, nil)
+            case let .failure(error):
+                completion(nil, error)
+            }
+        }
+    }
+
+    /**
+     Get the public audit accounting snapshot (daemon /get_public_audit)
+     - GET /node/audit/balances
+     - One read-only snapshot of XFG removed from circulation and its components, protocol treasury custody, CD yield backing, protocol-owned Hearth liquidity, and SWF balances, all read from a single chain tip. Counters and the vault UTXO balances that back them are reported separately and are never summed; there is no combined XFG+HEAT treasury total. Every monetary value is a decimal string of atomic units. No API key is required.
+     - returns: RequestBuilder<PublicAuditBalances> 
+     */
+    open class func nodeAuditBalancesGetWithRequestBuilder() -> RequestBuilder<PublicAuditBalances> {
+        let localVariablePath = "/node/audit/balances"
+        let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<PublicAuditBalances>.Type = OpenAPIClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false)
+    }
+
+    /**
+     Get block by hash (json_rpc f_block_json)
+     
+     - parameter hash: (path)  
+     - parameter apiResponseQueue: The queue on which api response is dispatched.
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    @discardableResult
+    open class func nodeBlockHashGet(hash: String, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: Void?, _ error: Error?) -> Void)) -> RequestTask {
+        return nodeBlockHashGetWithRequestBuilder(hash: hash).execute(apiResponseQueue) { result in
+            switch result {
+            case .success:
+                completion((), nil)
+            case let .failure(error):
+                completion(nil, error)
+            }
+        }
+    }
+
+    /**
+     Get block by hash (json_rpc f_block_json)
+     - GET /node/block/{hash}
+     - parameter hash: (path)  
+     - returns: RequestBuilder<Void> 
+     */
+    open class func nodeBlockHashGetWithRequestBuilder(hash: String) -> RequestBuilder<Void> {
+        var localVariablePath = "/node/block/{hash}"
+        let hashPreEscape = "\(APIHelper.mapValueToPathItem(hash))"
+        let hashPostEscape = hashPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{hash}", with: hashPostEscape, options: .literal, range: nil)
+        let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<Void>.Type = OpenAPIClientAPI.requestBuilderFactory.getNonDecodableBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false)
+    }
+
+    /**
      Get block header by height (json_rpc getblockheaderbyheight)
      
      - parameter height: (path)  
@@ -247,6 +335,95 @@ open class DefaultAPI {
      */
     open class func nodeLastBlockHeaderGetWithRequestBuilder() -> RequestBuilder<Void> {
         let localVariablePath = "/node/last_block_header"
+        let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<Void>.Type = OpenAPIClientAPI.requestBuilderFactory.getNonDecodableBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false)
+    }
+
+    /**
+     Check reserve proof (json_rpc check_reserve_proof)
+     
+     - parameter nodeReserveProofPostRequest: (body)  
+     - parameter apiResponseQueue: The queue on which api response is dispatched.
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    @discardableResult
+    open class func nodeReserveProofPost(nodeReserveProofPostRequest: NodeReserveProofPostRequest, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: Void?, _ error: Error?) -> Void)) -> RequestTask {
+        return nodeReserveProofPostWithRequestBuilder(nodeReserveProofPostRequest: nodeReserveProofPostRequest).execute(apiResponseQueue) { result in
+            switch result {
+            case .success:
+                completion((), nil)
+            case let .failure(error):
+                completion(nil, error)
+            }
+        }
+    }
+
+    /**
+     Check reserve proof (json_rpc check_reserve_proof)
+     - POST /node/reserve-proof
+     - parameter nodeReserveProofPostRequest: (body)  
+     - returns: RequestBuilder<Void> 
+     */
+    open class func nodeReserveProofPostWithRequestBuilder(nodeReserveProofPostRequest: NodeReserveProofPostRequest) -> RequestBuilder<Void> {
+        let localVariablePath = "/node/reserve-proof"
+        let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
+        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: nodeReserveProofPostRequest)
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: Any?] = [
+            "Content-Type": "application/json",
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<Void>.Type = OpenAPIClientAPI.requestBuilderFactory.getNonDecodableBuilder()
+
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false)
+    }
+
+    /**
+     Get transaction by hash (json_rpc f_transaction_json)
+     
+     - parameter hash: (path)  
+     - parameter apiResponseQueue: The queue on which api response is dispatched.
+     - parameter completion: completion handler to receive the data and the error objects
+     */
+    @discardableResult
+    open class func nodeTransactionHashGet(hash: String, apiResponseQueue: DispatchQueue = OpenAPIClientAPI.apiResponseQueue, completion: @escaping ((_ data: Void?, _ error: Error?) -> Void)) -> RequestTask {
+        return nodeTransactionHashGetWithRequestBuilder(hash: hash).execute(apiResponseQueue) { result in
+            switch result {
+            case .success:
+                completion((), nil)
+            case let .failure(error):
+                completion(nil, error)
+            }
+        }
+    }
+
+    /**
+     Get transaction by hash (json_rpc f_transaction_json)
+     - GET /node/transaction/{hash}
+     - parameter hash: (path)  
+     - returns: RequestBuilder<Void> 
+     */
+    open class func nodeTransactionHashGetWithRequestBuilder(hash: String) -> RequestBuilder<Void> {
+        var localVariablePath = "/node/transaction/{hash}"
+        let hashPreEscape = "\(APIHelper.mapValueToPathItem(hash))"
+        let hashPostEscape = hashPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{hash}", with: hashPostEscape, options: .literal, range: nil)
         let localVariableURLString = OpenAPIClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
 

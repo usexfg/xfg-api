@@ -9,6 +9,12 @@ docs/scripts/git_push.sh
 src/Org.OpenAPITools.Test/Api/ApiTestsBase.cs
 src/Org.OpenAPITools.Test/Api/DefaultApiTests.cs
 src/Org.OpenAPITools.Test/Api/DependencyInjectionTests.cs
+src/Org.OpenAPITools.Test/Model/NodeReserveProofPostRequestTests.cs
+src/Org.OpenAPITools.Test/Model/PublicAuditBalancesCdYieldAccountingTests.cs
+src/Org.OpenAPITools.Test/Model/PublicAuditBalancesHearthPoolTests.cs
+src/Org.OpenAPITools.Test/Model/PublicAuditBalancesSwfAccountsTests.cs
+src/Org.OpenAPITools.Test/Model/PublicAuditBalancesTests.cs
+src/Org.OpenAPITools.Test/Model/PublicAuditBalancesTreasuryAccountsTests.cs
 src/Org.OpenAPITools.Test/Model/WalletTransferPostRequestDestinationsInnerTests.cs
 src/Org.OpenAPITools.Test/Model/WalletTransferPostRequestMessagesInnerTests.cs
 src/Org.OpenAPITools.Test/Model/WalletTransferPostRequestTests.cs
@@ -37,6 +43,12 @@ src/Org.OpenAPITools/Client/TokenProvider`1.cs
 src/Org.OpenAPITools/Extensions/IHostBuilderExtensions.cs
 src/Org.OpenAPITools/Extensions/IHttpClientBuilderExtensions.cs
 src/Org.OpenAPITools/Extensions/IServiceCollectionExtensions.cs
+src/Org.OpenAPITools/Model/NodeReserveProofPostRequest.cs
+src/Org.OpenAPITools/Model/PublicAuditBalances.cs
+src/Org.OpenAPITools/Model/PublicAuditBalancesCdYieldAccounting.cs
+src/Org.OpenAPITools/Model/PublicAuditBalancesHearthPool.cs
+src/Org.OpenAPITools/Model/PublicAuditBalancesSwfAccounts.cs
+src/Org.OpenAPITools/Model/PublicAuditBalancesTreasuryAccounts.cs
 src/Org.OpenAPITools/Model/WalletTransferPostRequest.cs
 src/Org.OpenAPITools/Model/WalletTransferPostRequestDestinationsInner.cs
 src/Org.OpenAPITools/Model/WalletTransferPostRequestMessagesInner.cs

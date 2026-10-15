@@ -52,6 +52,13 @@ impl NodeClient {
     pub async fn get_blockcount(&self) -> Result<serde_json::Value, Error> { self.base.get_json("node/blockcount").await }
     pub async fn get_last_block_header(&self) -> Result<serde_json::Value, Error> { self.base.get_json("node/last_block_header").await }
     pub async fn get_block_header_by_height(&self, height: u64) -> Result<serde_json::Value, Error> { self.base.get_json(&format!("node/block_header_by_height/{}", height)).await }
+
+    /// Read-only accounting snapshot from a single chain tip.
+    ///
+    /// Monetary fields are decimal strings of atomic units. They exceed 2^53-1,
+    /// so reading one as `f64` loses digits — deserialize them as `&str` or
+    /// `u128`, never `f64`.
+    pub async fn get_public_audit_balances(&self) -> Result<serde_json::Value, Error> { self.base.get_json("node/audit/balances").await }
 }
 
 #[derive(Clone, Debug, Serialize, Deserialize)]

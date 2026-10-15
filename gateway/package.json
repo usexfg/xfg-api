@@ -6,7 +6,8 @@
   "type": "commonjs",
   "license": "GPL-3.0-or-later",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "test": "node --test --test-force-exit test/"
   },
   "dependencies": {
     "better-sqlite3": "^13.0.3",

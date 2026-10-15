@@ -32,6 +32,15 @@ class NodeClient(BaseClient):
     def get_block_header_by_height(self, height: int):
         return self._get(f'/node/block_header_by_height/{height}')
 
+    def get_public_audit_balances(self) -> dict:
+        """Read-only accounting snapshot from a single chain tip.
+
+        Monetary fields are decimal strings of atomic units, not ints: they
+        exceed 2^53-1, so converting them to float loses digits. Use int() only
+        when you need arithmetic, never float().
+        """
+        return self._get('/node/audit/balances')
+
 class WalletClient(BaseClient):
     def get_balance(self):
         return self._get('/wallet/balance')

@@ -26,6 +26,9 @@ class FuegoNodeClient extends BaseClient {
   getBlockCount() { return this.get('/node/blockcount'); }
   getLastBlockHeader() { return this.get('/node/last_block_header'); }
   getBlockHeaderByHeight(height) { return this.get(`/node/block_header_by_height/${height}`); }
+  // Monetary fields come back as decimal strings of atomic units. Keep them as
+  // strings: parsing one with Number or parseInt loses digits above 2^53-1.
+  getPublicAuditBalances() { return this.get('/node/audit/balances'); }
 }
 
 class FuegoWalletClient extends BaseClient {

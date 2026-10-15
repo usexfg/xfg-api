@@ -1,6 +1,6 @@
 /*
  * Elderfire API Gateway
- * REST API over Fuego Wallet RPC
+ * REST API over Fuego L1 Network RPC
  *
  * The version of the OpenAPI document: 1.0.0
  * 
@@ -20,7 +20,7 @@ import java.net.URI;
 import java.util.Map;
 import java.util.List;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-08-09T11:26:48.795596969Z[Etc/UTC]", comments = "Generator version: 7.14.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-10-14T03:20:01.254602-04:00[America/New_York]", comments = "Generator version: 7.14.0")
 public interface Authentication {
     /**
      * Apply authentication settings to header and query params.
